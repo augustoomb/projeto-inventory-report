@@ -1,5 +1,3 @@
-# from simple_report import SimpleReport
-
 from inventory_report.reports.simple_report import SimpleReport
 
 
@@ -43,7 +41,7 @@ class CompleteReport(SimpleReport):
         s_report = cls.get_simple_report(list_dic_products)
         prods_by_company = cls.get_products_by_company(list_dic_products)
 
-        return f"{s_report}\n" f"{prods_by_company}\n"
+        return f"{s_report}\n" f"{prods_by_company}"
 
         # print(s_report)
         # print(prods_by_company)
