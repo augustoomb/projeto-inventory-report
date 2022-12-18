@@ -6,49 +6,49 @@ from collections import Counter
 
 
 class SimpleReport:
-    @staticmethod
-    def get_oldest_date(arr):
+    @classmethod
+    def get_oldest_date(cls, arr):
         return min(arr)
 
-    @staticmethod
-    def get_newer_date(arr):
+    @classmethod
+    def get_newer_date(cls, arr):
         if len(arr) > 0:
             return min(arr)
 
-    @staticmethod
-    def count_products(arr):
+    @classmethod
+    def count_products(cls, arr):
         count = Counter(arr)
         return count.most_common(1)[0][0]
 
-    @staticmethod
-    def mount_report(arr_data_fab, arr_data_validade, arr_donas_produtos):
+    @classmethod
+    def mount_report(cls, arr_data_fab, arr_data_validade, arr_donas_produtos):
 
         return (
             f"Data de fabricação mais antiga: "
-            f"{SimpleReport.get_oldest_date(arr_data_fab)}\n"
+            f"{cls.get_oldest_date(arr_data_fab)}\n"
             f"Data de validade mais próxima: "
-            f"{SimpleReport.get_newer_date(arr_data_validade)}\n"
+            f"{cls.get_newer_date(arr_data_validade)}\n"
             f"Empresa com mais produtos: "
-            f"{SimpleReport.count_products(arr_donas_produtos)}"
+            f"{cls.count_products(arr_donas_produtos)}"
         )
 
-    @staticmethod
-    def convert_string_to_date(str):
+    @classmethod
+    def convert_string_to_date(cls, str):
         return datetime.strptime(str, "%Y-%m-%d").date()
 
-    @staticmethod
-    def generate(list_dict_products):
+    @classmethod
+    def generate(cls, list_dict_products):
         arr_data_fabricacao = []
         arr_data_validade = []
         arr_donas_produtos = []
 
         for product in list_dict_products:
-            data_fabricacao_convertida = SimpleReport.convert_string_to_date(
+            data_fabricacao_convertida = cls.convert_string_to_date(
                 product["data_de_fabricacao"]
             )
             arr_data_fabricacao.append(data_fabricacao_convertida)
 
-            data_validade_convertida = SimpleReport.convert_string_to_date(
+            data_validade_convertida = cls.convert_string_to_date(
                 product["data_de_validade"]
             )
 
@@ -57,7 +57,7 @@ class SimpleReport:
 
             arr_donas_produtos.append(product["nome_da_empresa"])
 
-        return SimpleReport.mount_report(
+        return cls.mount_report(
             arr_data_fabricacao, arr_data_validade, arr_donas_produtos
         )
 
