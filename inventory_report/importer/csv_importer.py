@@ -30,3 +30,9 @@ class CsvImporter(Importer):
             raise ValueError("Arquivo inválido")
 
         return cls.get_data_in_csv(path)
+
+
+# try:
+#     print(CsvImporter.import_data("inventory_report/data/inventory.txt"))
+# except ValueError as err:
+#     print(err)

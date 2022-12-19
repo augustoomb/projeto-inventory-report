@@ -3,7 +3,7 @@ import os
 import xmltodict
 
 
-class CsvImporter(Importer):
+class XmlImporter(Importer):
     @classmethod
     def get_extension(cls, path):
         file_name, file_extension = os.path.splitext(path)
@@ -20,3 +20,9 @@ class CsvImporter(Importer):
             raise ValueError("Arquivo inválido")
 
         return cls.get_data_in_xml(path)
+
+
+# try:
+#     print(XmlImporter.import_data("inventory_report/data/inventory.txt"))
+# except ValueError as err:
+#     print(err)

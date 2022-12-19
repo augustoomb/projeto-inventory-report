@@ -23,4 +23,7 @@ class JsonImporter(Importer):
         return cls.get_data_in_json(path)
 
 
-# print(JsonImporter.import_data("inventory_report/data/inventory.json"))
+# try:
+#     print(JsonImporter.import_data("inventory_report/data/inventory.txt"))
+# except ValueError as err:
+#     print(err)
