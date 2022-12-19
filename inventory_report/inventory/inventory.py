@@ -1,6 +1,5 @@
 import csv
 import json
-import xml
 import os
 
 from inventory_report.reports.simple_report import SimpleReport
