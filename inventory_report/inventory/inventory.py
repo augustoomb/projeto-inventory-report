@@ -29,9 +29,6 @@ class Inventory:
             data = file.read()
             return json.loads(data)
 
-    # with open('path/to/file.xml') as fd:
-    # doc = xmltodict.parse(fd.read())
-
     @classmethod
     def get_data_in_xml(cls, path):
         with open(path) as file:
