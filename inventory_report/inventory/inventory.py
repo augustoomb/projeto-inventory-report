@@ -1,6 +1,7 @@
 import csv
 import json
 import os
+import xmltodict
 
 from inventory_report.reports.simple_report import SimpleReport
 from inventory_report.reports.complete_report import CompleteReport
@@ -28,11 +29,13 @@ class Inventory:
             data = file.read()
             return json.loads(data)
 
-    # @classmethod
-    # def get_data_in_xml(cls, path):
-    #     with open(path, encoding="utf-8") as file:
-    #         data = csv.DictReader(file, delimiter=",", quotechar='"')
-    #         return cls.generate_list_with_data(data)
+    # with open('path/to/file.xml') as fd:
+    # doc = xmltodict.parse(fd.read())
+
+    @classmethod
+    def get_data_in_xml(cls, path):
+        with open(path) as file:
+            return xmltodict.parse(file.read())["dataset"]["record"]
 
     @classmethod
     def get_extension(cls, path):
@@ -63,9 +66,13 @@ class Inventory:
         if type_report == "simples":
             return SimpleReport.generate(content)
 
-        # if type_report == "completo":
         else:
             return CompleteReport.generate(content)
 
 
-# Inventory.import_data("inventory_report/data/inventory.json", "simples")
+# Inventory.import_data("inventory_report/data/inventory.xml", "simples")
+
+
+# referencias:
+# https://python-guide-pt-br.readthedocs.io/pt_BR/latest/scenarios/xml.html
+# https://www.digitalocean.com/community/tutorials/get-file-extension-in-python
