@@ -1,6 +1,5 @@
 from inventory_report.reports.colored_report import ColoredReport
 from inventory_report.reports.simple_report import SimpleReport
-import re
 
 # FLUXO:
 # simpleRep = SimpleReport()
@@ -55,46 +54,26 @@ def test_decorar_relatorio():
         },
     ]
 
-    # str_retorno = (
-    # "Data de fabricação mais antiga: 2010-04-04\n"
-    # "Data de validade mais próxima: 2023-02-09\n"
-    # "Empresa com mais produtos: Forces of Nature"
-    # )
-    # datas = re.findall(r"(\d+-\d+-\d+)", str_retorno)
+    green_words = [
+        "\033[32mData de fabricação mais antiga:\033[0m ",
+        "\033[32mData de validade mais próxima:\033[0m ",
+        "\033[32mEmpresa com mais produtos:\033[0m ",
+    ]
 
-    # print(datas)
+    content = [
+        "\033[36m2010-04-04\033[0m",
+        "\033[36m2023-02-09\033[0m",
+        "\033[31mForces of Nature\033[0m",
+    ]
 
-    # executando...
     simpleRep = SimpleReport()
     coloredRep = ColoredReport(simpleRep)
     str_report = coloredRep.generate(list_test)
 
-    # frases verdes que a string deve conter
-    green_phrases = [
-        "Data de fabricação mais antiga:",
-        "Data de validade mais próxima:",
-        "Empresa com mais produtos:",
-    ]
+    split_report = str_report.split("\n")
 
-    # checando se as frases acima estão na string devolvida (e se são verdes)
-    for phrase in green_phrases:
-        assert f"\033[32m{phrase}\033[0m" in str_report
-
-    # pegar as datas da string
-    arr_dates = re.findall(r"(\d+-\d+-\d+)", str_report)
-
-    # checando se as datas são azuis
-    for item_date in arr_dates:
-        assert f"\033[36m{item_date}\033[0m" in str_report
-
-    # my_string="hello python world , i'm a beginner"
-    # print(my_string.split("world",1)[1])
-    # SAÍDA: , i'm a beginner
-
-    # pegando nome da empresa:
-    company = str_report.split("produtos:", 1)[1]
-
-    # checando se nome da empresa está em vermelho
-    assert f"\033[31m{company}\033[0m" in str_report
-
-    # assert repr(coloredRep.generate(list_test))
+    for index, item in enumerate(green_words):
+        assert split_report[index] == green_words[index] + content[index]
+        # print("aqui")
+        # print(content[index])
+        # print("fim aqui")
